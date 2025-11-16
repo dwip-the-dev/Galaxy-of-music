@@ -10,19 +10,22 @@
   <header class="site-header">
     <div class="container">
       <a class="logo" href="#">Galaxy-of-Music</a>
-      <nav class="nav">
-        <a href="#features"> Explore</a>
+
+      <nav class="nav" id="navMenu">
+        <a href="#features">Explore</a>
         <a href="#playlist">Playlist</a>
         <a href="#about">About</a>
       </nav>
+
       <div class="search-wrap">
         <input id="search" type="search" placeholder="Search tracks, artists..." />
       </div>
-      <div class="theme-toggle">
-        <button id="themeBtn"></button>
-      </div>
-      <div class="menu-toggle" id="menuToggle">☰</div>
 
+      <div class="theme-toggle">
+        <button id="themeBtn">🌙</button>
+      </div>
+
+      <div class="menu-toggle" id="menuToggle">☰</div>
     </div>
   </header>
 
@@ -46,48 +49,47 @@
     </section>
 
     <section id="playlist" class="container playlist">
-  <h2>Now Playing</h2>
-  <h3>Queue</h3>
-  <ul id="queue" class="queue"></ul>
-</section>
+      <h2>Now Playing</h2>
+      <h3>Queue</h3>
+      <ul id="queue" class="queue"></ul>
+    </section>
 
-<!-- Fixed bottom player -->
-<div class="player">
-  <div class="player-info">
-    <img id="now-art" src="image/Radhe.jpeg" alt="Album Art" />
-    <div>
-      <div id="now-title">--</div>
-      <div id="now-artist">--</div>
+    <!-- Fixed bottom player -->
+    <div class="player">
+      <div class="player-info">
+        <img id="now-art" src="image/Radhe.jpeg" alt="Album Art" />
+        <div>
+          <div id="now-title">--</div>
+          <div id="now-artist">--</div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="prevBtn">⏮️</button>
+        <button id="playPauseBtn">▶ Play</button>
+        <button id="nextBtn">⏭️</button>
+
+        <div class="time">
+          <span id="currentTime">00:00</span> /
+          <span id="totalTime">00:00</span>
+        </div>
+      </div>
+
+      <audio id="audio"></audio>
     </div>
-  </div>
-
-  <div class="controls">
-    <button id="prevBtn">⏮️</button>
-    <button id="playPauseBtn">▶</button>
-    <button id="nextBtn">⏭️</button>
-    <div class="time">
-  <span id="currentTime">00:00</span> /
-  <span id="totalTime">00:00</span>
-</div>
-
-  </div>
-
-  <audio id="audio"></audio>
-</div>
-
 
     <section id="about" class="container about">
       <h2>Galaxy-of-Music</h2>
+      <p>A simple, beginner-friendly music player project.</p>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-    <span id=></span> Galaxy-of-music — me and S ❤️
+      <span> © Galaxy-of-Music — me and S ❤️</span>
     </div>
   </footer>
+
   <script src="main.js"></script>
 </body>
 </html>
-
-
