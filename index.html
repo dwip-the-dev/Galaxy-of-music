@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galaxy-of-Music — Music for Every Mood</title>
+  <link rel="stylesheet" href="design.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="#">Galaxy-of-Music</a>
+      <nav class="nav">
+        <a href="#features"> Explore</a>
+        <a href="#playlist">Playlist</a>
+        <a href="#about">About</a>
+      </nav>
+      <div class="search-wrap">
+        <input id="search" type="search" placeholder="Search tracks, artists..." />
+      </div>
+      <div class="theme-toggle">
+        <button id="themeBtn"></button>
+      </div>
+      <div class="menu-toggle" id="menuToggle">☰</div>
+
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <h1>Find Your Next Favorite Song</h1>
+          <p>Curated playlists, instant playback, and a clean listening experience.</p>
+          <a class="btn" href="#playlist">Listen Now</a>
+        </div>
+        <div class="hero-art">
+          <img src="image/4999.jpg" alt="Headphones" />
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="container features">
+      <h2>Featured Tracks</h2>
+      <div id="tracks" class="track-grid"></div>
+    </section>
+
+    <section id="playlist" class="container playlist">
+  <h2>Now Playing</h2>
+  <h3>Queue</h3>
+  <ul id="queue" class="queue"></ul>
+</section>
+
+<!-- Fixed bottom player -->
+<div class="player">
+  <div class="player-info">
+    <img id="now-art" src="image/Radhe.jpeg" alt="Album Art" />
+    <div>
+      <div id="now-title">--</div>
+      <div id="now-artist">--</div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button id="prevBtn">⏮️</button>
+    <button id="playPauseBtn">▶</button>
+    <button id="nextBtn">⏭️</button>
+    <div class="time">
+  <span id="currentTime">00:00</span> /
+  <span id="totalTime">00:00</span>
+</div>
+
+  </div>
+
+  <audio id="audio"></audio>
+</div>
+
+
+    <section id="about" class="container about">
+      <h2>Galaxy-of-Music</h2>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+    <span id=></span> Galaxy-of-music — me and S ❤️
+    </div>
+  </footer>
+  <script src="main.js"></script>
+</body>
+</html>
+
+
