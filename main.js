@@ -17,7 +17,7 @@ const tracks = [
     id: 'g3',
     title: 'mai phir bhi tum ko chahuga',
     artist: 'arjit singh',
-    src: "music/song3.mp3", 
+    src: "music/song3.mp3",
     art: 'image/phir bhi.jpg'
   },
   {
@@ -27,24 +27,27 @@ const tracks = [
     src: "music/dulri pawan singh song4.mp3",
     art: 'image/dulri pawan singh.avif'
   },
-{
-  id: 'g5',
-  title: 'Ha ham bihari hai ji',
-  artist:'Manoj tiwari',
-  src: "music/Haan Hum Bihari Hain ji song5.mp3",
-  art: 'image/ha ham bihari hai ji.jpg'
-},
+  {
+    id: 'g5',
+    title: 'Ha ham bihari hai ji',
+    artist:'Manoj tiwari',
+    src: "music/Haan Hum Bihari Hain ji song5.mp3",
+    art: 'image/ha ham bihari hai ji.jpg'
+  },
 ];
 
+// DOM Elements
 const tracksContainer = document.getElementById('tracks');
 const audio = document.getElementById('audio');
 const nowTitle = document.getElementById('now-title');
 const nowArtist = document.getElementById('now-artist');
 const nowArt = document.getElementById('now-art');
 const queueEl = document.getElementById('queue');
-const yearEl = document.getElementById('year');
-const themeBtn = document.getElementById('themeBtn');
 const search = document.getElementById('search');
+const playPauseBtn = document.getElementById("playPauseBtn");
+const navMenu = document.getElementById("navMenu");
+const menuToggle = document.getElementById("menuToggle");
+const themeBtn = document.getElementById("themeBtn");
 
 let queue = [...tracks];
 let currentIndex = 0;
@@ -67,15 +70,7 @@ function renderTracks(list) {
 
 renderTracks(tracks);
 
-// HANDLE PLAY BUTTONS
-tracksContainer.addEventListener('click', e => {
-  if (e.target.classList.contains('play-btn')) {
-    const id = e.target.dataset.id;
-    const track = tracks.find(t => t.id === id);
-    playTrack(track);
-  }
-});
-
+// PLAY TRACK FUNCTION
 function playTrack(track) {
   audio.src = track.src;
   audio.play();
@@ -84,19 +79,29 @@ function playTrack(track) {
   nowArt.src = track.art;
 }
 
-// QUEUE
+// TRACK CLICK HANDLER
+tracksContainer.addEventListener('click', e => {
+  if (e.target.classList.contains('play-btn')) {
+    const id = e.target.dataset.id;
+    const track = tracks.find(t => t.id === id);
+    currentIndex = tracks.indexOf(track);
+    playTrack(track);
+  }
+});
+
+// RENDER QUEUE
 function renderQueue() {
   queueEl.innerHTML = '';
   queue.forEach((t, i) => {
     const li = document.createElement('li');
-    li.innerHTML = `${i + 1}. ${t.title} — ${t.artist}`;
+    li.textContent = `${i + 1}. ${t.title} — ${t.artist}`;
     queueEl.appendChild(li);
   });
 }
 renderQueue();
 
-// BASIC PLAYER CONTROLS
-document.getElementById('playPauseBtn').addEventListener('click', () => {
+// PLAYER CONTROLS
+playPauseBtn.addEventListener('click', () => {
   if (audio.paused) audio.play();
   else audio.pause();
 });
@@ -111,9 +116,37 @@ document.getElementById('prevBtn').addEventListener('click', () => {
   playTrack(queue[currentIndex]);
 });
 
+// AUTO PLAY NEXT
 audio.addEventListener('ended', () => {
   currentIndex = (currentIndex + 1) % queue.length;
   playTrack(queue[currentIndex]);
+});
+
+// TIME DISPLAY
+const currentTimeEl = document.getElementById('currentTime');
+const totalTimeEl = document.getElementById('totalTime');
+
+function formatTime(s) {
+  const m = Math.floor(s / 60).toString().padStart(2, "0");
+  const sec = Math.floor(s % 60).toString().padStart(2, "0");
+  return `${m}:${sec}`;
+}
+
+audio.addEventListener("loadedmetadata", () => {
+  totalTimeEl.textContent = formatTime(audio.duration);
+});
+
+audio.addEventListener("timeupdate", () => {
+  currentTimeEl.textContent = formatTime(audio.currentTime);
+});
+
+// UI updates for play/pause button
+audio.addEventListener("play", () => {
+  playPauseBtn.textContent = "⏸ Pause";
+});
+
+audio.addEventListener("pause", () => {
+  playPauseBtn.textContent = "▶ Play";
 });
 
 // SEARCH
@@ -124,33 +157,15 @@ search.addEventListener('input', e => {
     t.artist.toLowerCase().includes(q)
   );
   renderTracks(filtered);
-});const currentTimeEl = document.getElementById('currentTime');
-const totalTimeEl = document.getElementById('totalTime');
-
-// Format time (mm:ss)
-function formatTime(seconds) {
-  let m = Math.floor(seconds / 60);
-  let s = Math.floor(seconds % 60);
-  if (m < 10) m = "0" + m;
-  if (s < 10) s = "0" + s;
-  return `${m}:${s}`;
-}
-
-// Show total time when song loads
-audio.addEventListener("loadedmetadata", () => {
-  totalTimeEl.textContent = formatTime(audio.duration);
 });
 
-// Update current time while playing
-audio.addEventListener("timeupdate", () => {
-  currentTimeEl.textContent = formatTime(audio.currentTime);
-});// When track starts playing (auto update button)
-audio.addEventListener("play", () => {
-  playPauseBtn.textContent = "⏸ Pause";
+// MOBILE MENU
+menuToggle.addEventListener("click", () => {
+  navMenu.classList.toggle("active");
 });
 
-// When paused (auto update button)
-audio.addEventListener("pause", () => {
-  playPauseBtn.textContent = "▶ Play";
+// THEME TOGGLE
+themeBtn.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  themeBtn.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
 });
-
